@@ -33,4 +33,9 @@ public class TweetService {
     public List<Tweet> findTweetList() {
         return tweetRepository.findAll();
     }
+
+    public Tweet findTweet(Long tweetId) {
+        return tweetRepository.findById(tweetId)
+                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 트윗입니다."));
+    }
 }

@@ -33,18 +33,13 @@ public class TweetController {
         return tweetList.stream().map(TweetResponseDto::from).collect(Collectors.toList());
     }
 
-
-
-
-//    @GetMapping
-//    @ResponseStatus(value = HttpStatus.OK)
-//    public List<PostResponseDto> postListFind() {
-//        List<Post> postList = postService.findPostList();
-//        return postList.stream().map(PostResponseDto::from).collect(Collectors.toList());
-//    }
-
-
     // 트윗 1개 조회
+    @GetMapping("/{tweetId}")
+    @ResponseStatus(value = HttpStatus.OK)
+    public TweetResponseDto tweetFind(@PathVariable Long tweetId) {
+        Tweet tweet = tweetService.findTweet(tweetId);
+        return TweetResponseDto.from(tweet);
+    }
 
     // 트윗 삭제
 
