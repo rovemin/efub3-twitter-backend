@@ -42,5 +42,10 @@ public class TweetController {
     }
 
     // 트윗 삭제
-
+    @DeleteMapping("/{tweetId}/{accountId}")
+    @ResponseStatus(value = HttpStatus.OK)
+    public String tweetRemove(@PathVariable Long tweetId, @PathVariable Long accountId) {
+        tweetService.removeTweet(tweetId, accountId);
+        return "트윗이 삭제되었습니다.";
+    }
 }

@@ -30,12 +30,20 @@ public class TweetService {
         );
     }
 
+    @Transactional(readOnly = true)
     public List<Tweet> findTweetList() {
         return tweetRepository.findAll();
     }
 
+    @Transactional(readOnly = true)
     public Tweet findTweet(Long tweetId) {
         return tweetRepository.findById(tweetId)
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 트윗입니다."));
+    }
+
+    public void removeTweet(Long tweetId, Long accountId) {
+        Tweet tweet = tweetRepository.findByTweetIdAndAndWriter_AccountId(tweetId, accountId)
+                .orElseThrow(() -> new IllegalArgumentException("잘못된 접근입니다."));
+        tweetRepository.delete(tweet);
     }
 }
