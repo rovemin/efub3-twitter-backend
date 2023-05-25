@@ -20,11 +20,11 @@ public class AccountResponseDto {
     private LocalDateTime joinDate;
 
     @Builder
-    public AccountResponseDto(@NotNull Account account) {
+    public AccountResponseDto(Account account) {
         this.accountId = account.getAccountId();
         this.userId = account.getUserId();
         this.name = account.getName();
         this.email = account.getEmail();
-        this.joinDate = account.getJoinDate();
+        this.joinDate = account.getCreatedDate();
     }
 }
