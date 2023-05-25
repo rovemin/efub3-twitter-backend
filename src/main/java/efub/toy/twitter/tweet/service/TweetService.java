@@ -10,6 +10,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 @Transactional
@@ -20,7 +22,6 @@ public class TweetService {
     public Tweet addTweet(TweetRequestDto requestDto) {
         Account writer = accountRepository.findById(requestDto.getAccountId())
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 계정입니다."));
-
         return tweetRepository.save(
                 Tweet.builder()
                         .content(requestDto.getContent())
@@ -29,4 +30,7 @@ public class TweetService {
         );
     }
 
+    public List<Tweet> findTweetList() {
+        return tweetRepository.findAll();
+    }
 }

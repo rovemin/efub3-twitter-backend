@@ -2,6 +2,7 @@ package efub.toy.twitter.tweet.dto;
 
 import efub.toy.twitter.tweet.domain.Tweet;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -15,10 +16,19 @@ public class TweetResponseDto {
     private String content;
     private LocalDateTime createdDate;
 
-    public TweetResponseDto(Tweet tweet) {
-        this.tweetId = tweet.getTweetId();
-        this.userId = tweet.getWriter().getUserId();
-        this.content = tweet.getContent();
-        this.createdDate = tweet.getCreatedDate();
+    public TweetResponseDto(Long tweetId, String userId, String content, LocalDateTime createdDate) {
+        this.tweetId = tweetId;
+        this.userId = userId;
+        this.content = content;
+        this.createdDate = createdDate;
+    }
+
+    public static TweetResponseDto from(Tweet tweet) {
+        return new TweetResponseDto(
+            tweet.getTweetId(),
+            tweet.getWriter().getUserId(),
+            tweet.getContent(),
+            tweet.getCreatedDate()
+        );
     }
 }

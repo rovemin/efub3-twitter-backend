@@ -8,6 +8,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @RestController
 @RequestMapping("/tweets")
 @RequiredArgsConstructor
@@ -19,10 +22,27 @@ public class TweetController {
     @ResponseStatus(value = HttpStatus.CREATED)
     public TweetResponseDto tweetAdd(@RequestBody TweetRequestDto requestDto) {
         Tweet tweet = tweetService.addTweet(requestDto);
-        return new TweetResponseDto(tweet);
+        return TweetResponseDto.from(tweet);
     }
 
     // 트윗 전체 조회
+    @GetMapping
+    @ResponseStatus(value = HttpStatus.OK)
+    public List<TweetResponseDto> tweetListFind() {
+        List<Tweet> tweetList = tweetService.findTweetList();
+        return tweetList.stream().map(TweetResponseDto::from).collect(Collectors.toList());
+    }
+
+
+
+
+//    @GetMapping
+//    @ResponseStatus(value = HttpStatus.OK)
+//    public List<PostResponseDto> postListFind() {
+//        List<Post> postList = postService.findPostList();
+//        return postList.stream().map(PostResponseDto::from).collect(Collectors.toList());
+//    }
+
 
     // 트윗 1개 조회
 
