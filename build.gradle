@@ -36,3 +36,7 @@ tasks.named('test') {
 dependencies {
 	implementation "com.h2database:h2"
 }
+
+jar {
+	enabled = false
+}
