@@ -22,11 +22,13 @@ public class CORSConfig {
         // config.addAllowedOrigin("https://abc.dkfj/");
         config.addAllowedOrigin("http://localhost:3000/");
 
-
         config.addAllowedHeader("*");
         config.addAllowedMethod("*");
 
         config.setMaxAge(3600L);
+        config.addExposedHeader("Authorization");
+        config.addExposedHeader("refresh-token");
+
         source.registerCorsConfiguration("/**", config);
         return new CorsFilter(source);
     }
