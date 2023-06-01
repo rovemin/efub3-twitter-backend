@@ -24,7 +24,6 @@ public class CORSConfig {
 
         config.addAllowedHeader("*");
         config.addAllowedMethod("*");
-
         config.setMaxAge(3600L);
         config.addExposedHeader("Authorization");
         config.addExposedHeader("refresh-token");
