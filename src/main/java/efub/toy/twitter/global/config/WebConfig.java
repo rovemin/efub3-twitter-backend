@@ -2,6 +2,7 @@ package efub.toy.twitter.global.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -9,10 +10,10 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class WebConfig implements WebMvcConfigurer {
 
     @Override
+    @CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
                 .allowedOrigins("http://localhost:3000")
-                .allowedOrigins("*")
                 .allowedMethods(HttpMethod.GET.name())
                 .allowedMethods(HttpMethod.POST.name())
                 .allowedMethods(HttpMethod.PUT.name())
