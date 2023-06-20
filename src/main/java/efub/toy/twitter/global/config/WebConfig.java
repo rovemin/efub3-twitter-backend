@@ -10,7 +10,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class WebConfig implements WebMvcConfigurer {
 
     @Override
-    @CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
                 .allowedOrigins("http://localhost:3000")
@@ -19,6 +18,7 @@ public class WebConfig implements WebMvcConfigurer {
                 .allowedMethods(HttpMethod.PUT.name())
                 .allowedMethods(HttpMethod.DELETE.name())
                 .allowedHeaders("*")
-                .allowCredentials(true);
+                .allowCredentials(false)
+                .maxAge(3000);
     }
 }
